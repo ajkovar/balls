@@ -1,7 +1,7 @@
 (function($){
 	$(document).ready(function(){
 		
-		var canvasHeight = $(window).height() - $("#header").outerHeight(),
+		var canvasHeight = $(window).height() - $("#header").outerHeight() -30,
 			canvasWidth = $(window).width();
 		
 		$('body').append("<canvas id=\"canvas\" width='" + canvasWidth + "' height='" + canvasHeight + "'></canvas>")
@@ -11,8 +11,8 @@
 		
 		var canvas = $('#canvas'),
 			ctx = canvas[0].getContext("2d"),
-			x=5,
-			y=5,
+			x=10,
+			y=10,
 			dx=Math.floor(Math.random()*11)*2,
 			dy=Math.floor(Math.random()*11)*2
 		
@@ -20,30 +20,42 @@
 		
 		setInterval(function(){
 			
-			if(x+dx<=0+5 || x+dx>=canvasWidth-5){
-				dx = -dx/2;
-			}
-
-			if(y+dy<=0+5 || y+dy>=canvasHeight-5){
-				dy = -dy/2;
-			}
-			
 			ctx.clearRect(0,0,canvasWidth,canvasHeight);
 			
 			x+=dx;
 			y+=dy;
 			
+			if(x<10)
+				x=10;
+			else if(x>canvasWidth-10)
+				x=canvasWidth-10
+			
+			if(y<10)
+				y=10
+			else if(y>canvasHeight-10)
+				y=canvasHeight-10
+			
 			circle.draw(x, y)
+			
+			if(x<=10 || x>=canvasWidth-10){
+				dx = -dx/2;
+			}
+
+			if(y<=10 || y>=canvasHeight-10){
+				dy = -dy/2;
+			}
 			
 			dx=dx/1.02
 			
-			//dy=dy/1.02
+			if(Math.abs(dx)<.2)
+				dx=0
 			
+			//dy=dy/1.02
 			dy+=1
 			
 			//circle.draw(300-x, 300-y)
 			
-		}, 20)
+		}, 25)
 		
 		var handleKeypress = function(event) {
   			console.log("Keypress:")
