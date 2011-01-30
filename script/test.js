@@ -14,9 +14,13 @@
 			x=10,
 			y=10,
 			dx=Math.floor(Math.random()*11)*2,
-			dy=Math.floor(Math.random()*11)*2
+			dy=Math.floor(Math.random()*11)*2,
+			ax=0,
+			ay=.5
 		
 		var circle = new Circle(ctx, 10)
+		
+		var rect = new Rectangle(ctx, 20, 50)
 		
 		setInterval(function(){
 			
@@ -51,67 +55,60 @@
 				dx=0
 			
 			//dy=dy/1.02
-			dy+=1
+			dx+=ax
+			dy+=ay
 			
-			//circle.draw(300-x, 300-y)
+			// var rectX = 150,
+			// 	rectY = 150,
+			// 	rectWidth = 20,
+			// 	rectHeight = 50;
+			
+			// if(x>rectX-rectWidth/2 && x<rectX+rectWidth/2
+			// 	&& y>rectY-rectHeight/2 && y<rectY+rectHeight/2) {
+			// 	dx+=-dx/2
+			// 	dy+=-dy/2
+			// }
+			
+			// rect.draw(rectX, rectY)
 			
 		}, 25)
 		
-		var handleKeypress = function(event) {
-  			console.log("Keypress:")
-  			/*if (event.keyCode == '13') {
-				event.preventDefault();
-			}*/
-			
-			switch(event.keyCode) {
-				case 37: 
-					dx=dx-2
-					console.log("left");
-					event.preventDefault();
-					break;
-				case 38:
-					dy=dy-2
-					console.log("up");
-					event.preventDefault();
-					break;
-				case 39:
-					dx=dx+2
-					console.log("right");
-					event.preventDefault();
-					break;
-				case 40:
-					dy=dy+2
-					console.log("down");
-					event.preventDefault();
-					break;
-			}
-			
-		};
 		
-		//TODO have sniff browser and only perform one of these actions.. or find cross browser method
+		var keypressHandler = new KeypressHandler(document)
 		
-		//for chrome
-		$(document).keydown(handleKeypress);
-		//for ff
-		$(document).keypress(handleKeypress);
+		//left
+		keypressHandler.press(37, function(){
+			ax-=1
+		})
+		keypressHandler.up(37, function(){
+			ax+=1
+		})
+		
+		//up
+		keypressHandler.press(38, function(){
+			ay-=1
+		})
+		keypressHandler.up(38, function(){
+			ay+=1
+		})
+		
+		//right
+		keypressHandler.press(39, function(){
+			ax+=1
+		})
+		keypressHandler.up(39, function(){
+			ax-=1
+		})
+		
+		//down
+		keypressHandler.press(40, function(){
+			ay+=1
+		})
+		keypressHandler.up(40, function(){
+			ay-=1
+		})
 	
 	})
-	
-	var Circle = function(ctx, radius){
-		this.ctx = ctx
-		this.radius = radius
-	
-	}
-
-	Circle.prototype = {
-		draw: function(x,y) {
-		  var ctx = this.ctx;
-		  ctx.beginPath();
-		  ctx.arc(x, y, this.radius, 0, Math.PI*2, true);
-		  ctx.closePath();
-		  ctx.fill();
-		}
-	}
 	
 }(jQuery));
 
