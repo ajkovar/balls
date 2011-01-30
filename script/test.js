@@ -20,8 +20,6 @@
 		
 		var circle = new Circle(ctx, 10)
 		
-		var rect = new Rectangle(ctx, 20, 50)
-		
 		setInterval(function(){
 			
 			ctx.clearRect(0,0,canvasWidth,canvasHeight);
@@ -54,22 +52,8 @@
 			if(Math.abs(dx)<.2)
 				dx=0
 			
-			//dy=dy/1.02
 			dx+=ax
 			dy+=ay
-			
-			// var rectX = 150,
-			// 	rectY = 150,
-			// 	rectWidth = 20,
-			// 	rectHeight = 50;
-			
-			// if(x>rectX-rectWidth/2 && x<rectX+rectWidth/2
-			// 	&& y>rectY-rectHeight/2 && y<rectY+rectHeight/2) {
-			// 	dx+=-dx/2
-			// 	dy+=-dy/2
-			// }
-			
-			// rect.draw(rectX, rectY)
 			
 		}, 25)
 		
