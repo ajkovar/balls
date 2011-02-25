@@ -8,7 +8,7 @@
     }
 
     Circle.prototype = {
-        calculateVelocity: function() {
+        calculateVelocity: function(objects) {
             
             var x = this.x,
             y = this.y,
@@ -30,6 +30,20 @@
 	    
 	    dx+=this.ax
 	    dy+=this.ay
+
+            for(var i=0;i<objects.length;i++) {
+                var otherObj = objects[i];
+                if(otherObj===this) {
+                    continue;
+                }
+
+                var distance = Math.sqrt(Math.pow(this.x-otherObj.x, 2) + Math.pow(this.y-otherObj.y, 2))
+                if(distance<=2*this.radius) {
+                    dx = dx+otherObj.dx;
+                    dy = dy+otherObj.dy;
+                }
+	    
+            }
 
             this.dx = dx;
             this.dy = dy;

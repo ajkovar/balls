@@ -13,8 +13,8 @@
 
 	var canvas = $('#canvas'),
 	ctx = canvas[0].getContext("2d"),
-
-	circle = new Circle(ctx, 10, canvasWidth, canvasHeight)
+	circle = new Circle(ctx, 10, canvasWidth, canvasHeight),
+        circle2 = new Circle(ctx, 10, canvasWidth, canvasHeight);
 
 	circle.x=10,
 	circle.y=10,
@@ -23,15 +23,25 @@
 	circle.ax=0,
 	circle.ay=.5
 	
-	
+	circle2.x=100,
+	circle2.y=100,
+	circle2.dx=Math.floor(Math.random()*11)*2,
+	circle2.dy=Math.floor(Math.random()*11)*2,
+	circle2.ax=0,
+	circle2.ay=.5
+
+        var objects = [circle, circle2];
+
 	setInterval(function(){
 	    
 	    ctx.clearRect(0,0,canvasWidth,canvasHeight);
-	    
-            circle.calculateVelocity();
-            circle.calculatePosition();
-	    circle.draw();
-	    
+            for(var i=0;i<objects.length;i++) {
+                var obj = objects[i];
+                
+                obj.calculateVelocity(objects);
+                obj.calculatePosition();
+	        obj.draw();
+            }
 	    
 	}, 25)
 	
