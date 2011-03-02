@@ -32,13 +32,21 @@
 
         var objects = [circle, circle2];
 
-	setInterval(function(){
+        var limit = 200;
+	var timer = setInterval(function(){
+            console.log("------------------------")
+            if(limit>0) {
+                limit--;
+            }
+            else clearTimeout(timer)
 	    
 	    ctx.clearRect(0,0,canvasWidth,canvasHeight);
             for(var i=0;i<objects.length;i++) {
                 var obj = objects[i];
-                
                 obj.calculateVelocity(objects);
+            }
+            for(var i=0;i<objects.length;i++) {
+                var obj = objects[i];
                 obj.calculatePosition();
 	        obj.draw();
             }

@@ -31,18 +31,54 @@
 	    dx+=this.ax
 	    dy+=this.ay
 
+            this.multiplier=1;
+            
+
             for(var i=0;i<objects.length;i++) {
                 var otherObj = objects[i];
-                if(otherObj===this) {
-                    continue;
-                }
+                if(otherObj!==this) {
+                    var self = this;
 
-                var distance = Math.sqrt(Math.pow(this.x-otherObj.x, 2) + Math.pow(this.y-otherObj.y, 2))
-                if(distance<=2*this.radius) {
-                    dx = dx+otherObj.dx;
-                    dy = dy+otherObj.dy;
+                    var distance = Math.sqrt(Math.pow(self.x-otherObj.x, 2) + Math.pow(self.y-otherObj.y, 2))
+                    console.log("distance: " + distance)
+
+                    console.log("position: ("+ x + "," + y + ")")
+                    console.log("velocity: ("+ dx + "," + dy + ")")
+
+                    var adjustVelocity = function() {
+                        console.log("HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                        console.log("multiplier:" + self.multiplier)
+
+                        dx = dx+otherObj.dx;
+                        dy = dy+otherObj.dy;
+                    }
+
+                    var a = Math.pow(dx-otherObj.dx, 2) + Math.pow(dy-otherObj.dy, 2),
+                    b = 2*(x-otherObj.x)*(dx-otherObj.dx) + 2*(y-otherObj.y)*(dy-otherObj.dy),
+                    c = Math.pow(x-otherObj.x, 2) + Math.pow(y-otherObj.y, 2) - Math.pow(this.radius+otherObj.radius, 2);
+
+                    var discriminant = b*b-4*a*c;
+                    if(discriminant>0) {
+                        var t1 = (-b + Math.sqrt(discriminant))/(2*a);
+                        var t2 = (-b - Math.sqrt(discriminant))/(2*a);
+
+                        if(t1<=1 && t1>=0 && t2<=1 && t2>=0) {
+                            this.multiplier = Math.min(t1, t2)
+                            adjustVelocity()
+                        }
+                        else if(t1<=1 && t1>=0) {
+                            this.multiplier = t1;
+                            adjustVelocity()
+                        }
+                        else if(t2<=1 && t2>=0) {
+                            this.multiplier = t2;
+                            adjustVelocity()
+                        }
+                        else console.log("points not valid")
+                    }
+                    else console.log("discriminant invalid")
                 }
-	    
+                
             }
 
             this.dx = dx;
@@ -51,7 +87,6 @@
         calculatePosition: function() {
             var x = this.x;
             var y = this.y
-            
 	    x+=this.dx;
 	    y+=this.dy;
 	    
