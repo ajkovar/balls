@@ -27,13 +27,8 @@
 
         var objects = [circle, circle2];
 
-        var limit = 200;
 	var timer = setInterval(function(){
             console.log("------------------------")
-            if(limit>0) {
-                limit--;
-            }
-            else clearTimeout(timer)
 	    
 	    ctx.clearRect(0,0,canvasWidth,canvasHeight);
             for(var i=0;i<objects.length;i++) {
@@ -81,6 +76,11 @@
 	})
 	keypressHandler.up(40, function(){
 	    circle.ay-=1
+	})
+
+        // q
+	keypressHandler.up(81, function(){
+            clearTimeout(timer)
 	})
 	
     })
