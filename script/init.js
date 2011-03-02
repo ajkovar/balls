@@ -37,6 +37,9 @@
             }
             for(var i=0;i<objects.length;i++) {
                 var obj = objects[i];
+                //TODO refactor this smell
+                obj.dx=obj.newDx;
+                obj.dy=obj.newDy;
                 obj.calculatePosition();
 	        obj.draw();
             }

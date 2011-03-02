@@ -49,8 +49,9 @@
                         console.log("HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                         console.log("multiplier:" + self.multiplier)
 
-                        dx = dx+otherObj.dx;
-                        dy = dy+otherObj.dy;
+                        dx = otherObj.dx;
+                        dy = otherObj.dy;
+
                     }
 
                     var a = Math.pow(dx-otherObj.dx, 2) + Math.pow(dy-otherObj.dy, 2),
@@ -77,12 +78,20 @@
                         else console.log("points not valid")
                     }
                     else console.log("discriminant invalid")
+                    
+                    // very hackish code to make the balls fly apart
+                    // when they get stuck together.. to be removed once bugs in
+                    // above algorithm get fixed
+                    if(distance<this.radius+otherObj.radius) {
+                        dx+=(this.radius+otherObj.radius-(x-otherObj.x))/2;
+                        dy+=(this.radius+otherObj.radius-(y-otherObj.y))/2;
+                    }
                 }
                 
             }
 
-            this.dx = dx;
-            this.dy = dy;
+            this.newDx = dx;
+            this.newDy = dy;
         },
         calculatePosition: function() {
             var x = this.x;
