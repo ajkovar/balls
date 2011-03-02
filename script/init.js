@@ -1,15 +1,10 @@
 (function($){
     $(document).ready(function(){
 	
-	var canvasHeight = $(window).height() - $("#header").outerHeight() -30,
+	var canvasHeight = $(window).height(),
 	canvasWidth = $(window).width();
 	
 	$('body').append("<canvas id=\"canvas\" width='" + canvasWidth + "' height='" + canvasHeight + "'></canvas>")
-	
-	console.log(canvasHeight)
-	console.log(canvasWidth)
-	
-
 
 	var canvas = $('#canvas'),
 	ctx = canvas[0].getContext("2d"),
