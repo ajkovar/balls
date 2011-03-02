@@ -1,1 +1,8 @@
-
+body{
+    overflow:hidden;
+}
+.intro{
+    position:absolute;
+    color:#222;
+    opacity:.5;
+}
