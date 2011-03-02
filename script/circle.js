@@ -8,12 +8,14 @@
     }
 
     Circle.prototype = {
-        calculateVelocity: function(objects) {
+        calculateVelocity: function() {
             
             var x = this.x,
             y = this.y,
             dx = this.dx,
             dy = this.dy;
+
+	    dx+=this.ax
 
 	    if(x<=10 || x>=this.canvasWidth-10){
 		dx = -dx/2;
@@ -22,17 +24,24 @@
 	    if(y<=10 || y>=this.canvasHeight-10){
 		dy = -dy/2;
 	    }
+            else dy+=this.ay
+
 	    
 	    dx=dx/1.02
 	    
 	    if(Math.abs(dx)<.2)
 		dx=0
-	    
-	    dx+=this.ax
-	    dy+=this.ay
+
+            this.dx = dx;
+            this.dy = dy;
+        },
+        handleCollisions: function(objects) {
+            var x = this.x,
+            y = this.y,
+            dx = this.dx,
+            dy = this.dy;
 
             this.multiplier=1;
-            
 
             for(var i=0;i<objects.length;i++) {
                 var otherObj = objects[i];
@@ -44,6 +53,8 @@
 
                     console.log("position: ("+ x + "," + y + ")")
                     console.log("velocity: ("+ dx + "," + dy + ")")
+                    console.log("position: ("+ otherObj.x + "," + otherObj.y + ")")
+                    console.log("velocity: ("+ otherObj.dx + "," + otherObj.dy + ")")
 
                     var adjustVelocity = function() {
                         console.log("HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -75,23 +86,22 @@
                             this.multiplier = t2;
                             adjustVelocity()
                         }
-                        else console.log("points not valid")
+                        else {
+                            console.log("points not valid")
+                            console.log(t1)
+                            console.log(t2)
+                            if(distance<this.radius+otherObj.radius) {
+                                adjustVelocity()
+                            }
+                        }
+                            
                     }
                     else console.log("discriminant invalid")
-                    
-                    // very hackish code to make the balls fly apart
-                    // when they get stuck together.. to be removed once bugs in
-                    // above algorithm get fixed
-                    if(distance<this.radius+otherObj.radius) {
-                        dx+=(this.radius+otherObj.radius-(x-otherObj.x))/2;
-                        dy+=(this.radius+otherObj.radius-(y-otherObj.y))/2;
-                    }
                 }
                 
             }
-
-            this.newDx = dx;
-            this.newDy = dy;
+            this.newDx=dx;
+            this.newDy=dy;
         },
         calculatePosition: function() {
             var x = this.x;

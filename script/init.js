@@ -33,7 +33,11 @@
 	    ctx.clearRect(0,0,canvasWidth,canvasHeight);
             for(var i=0;i<objects.length;i++) {
                 var obj = objects[i];
-                obj.calculateVelocity(objects);
+                obj.calculateVelocity();
+            }
+            for(var i=0;i<objects.length;i++) {
+                var obj = objects[i];
+                obj.handleCollisions(objects);
             }
             for(var i=0;i<objects.length;i++) {
                 var obj = objects[i];
