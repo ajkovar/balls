@@ -85,6 +85,15 @@
 	keypressHandler.up(81, function(){
             clearTimeout(timer)
 	})
+
+        var gravityEnabled=true;
+        // g
+	keypressHandler.up(71, function(){
+            $.each(objects, function(i, o) {
+                o.ay+= gravityEnabled ? -.5 : .5;
+            })
+            gravityEnabled=!gravityEnabled;
+	})
 	
     })
     
