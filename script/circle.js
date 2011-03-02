@@ -13,15 +13,16 @@
             var x = this.x,
             y = this.y,
             dx = this.dx,
-            dy = this.dy;
+            dy = this.dy,
+            radius = this.radius;
 
 	    dx+=this.ax
 
-	    if(x<=10 || x>=this.canvasWidth-10){
+	    if(x<=radius || x>=this.canvasWidth-radius){
 		dx = -dx/2;
 	    }
 
-	    if(y<=10 || y>=this.canvasHeight-10){
+	    if(y<=radius || y>=this.canvasHeight-radius){
 		dy = -dy/2;
 	    }
             else dy+=this.ay
@@ -115,8 +116,8 @@
 	    else if(x>this.canvasWidth-radius)
 		x=this.canvasWidth-radius;
 	    
-	    if(y<10)
-		y=10
+	    if(y<radius)
+		y=radius
 	    else if(y>this.canvasHeight-radius)
 		y=this.canvasHeight-radius
 
