@@ -107,17 +107,18 @@
             var x = this.x;
             var y = this.y
 	    x+=this.dx;
-	    y+=this.dy;
+	    y+=this.dy,
+            radius = this.radius;
 	    
-	    if(x<10)
-		x=10;
-	    else if(x>this.canvasWidth-10)
-		x=this.canvasWidth-10
+	    if(x<radius)
+		x=radius;
+	    else if(x>this.canvasWidth-radius)
+		x=this.canvasWidth-radius;
 	    
 	    if(y<10)
 		y=10
-	    else if(y>this.canvasHeight-10)
-		y=this.canvasHeight-10
+	    else if(y>this.canvasHeight-radius)
+		y=this.canvasHeight-radius
 
             this.x=x;
             this.y=y;
