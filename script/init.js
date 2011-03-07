@@ -1,8 +1,11 @@
 (function($){
     $(document).ready(function(){
-	
-	var canvasHeight = $(window).height(),
+    
+	var log = log4javascript.getDefaultLogger(),
+	canvasHeight = $(window).height(),
 	canvasWidth = $(window).width();
+
+        log.setLevel(log4javascript.Level.ERROR);	
 	
 	$('body').append("<canvas id=\"canvas\" width='" + canvasWidth + "' height='" + canvasHeight + "'></canvas>")
 
@@ -28,7 +31,7 @@
         var objects = [circle, circle2];
 
 	var timer = setInterval(function(){
-            console.log("------------------------")
+            log.info("------------------------")
 	    
 	    ctx.clearRect(0,0,canvasWidth,canvasHeight);
             for(var i=0;i<objects.length;i++) {

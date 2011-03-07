@@ -1,5 +1,7 @@
 (function($){
     
+    var log = log4javascript.getDefaultLogger();
+
     var Circle = window.Circle = function(ctx, radius, canvasWidth, canvasHeight){
 	this.ctx = ctx;
 	this.radius = radius;
@@ -50,16 +52,16 @@
                     var self = this;
 
                     var distance = Math.sqrt(Math.pow(self.x-otherObj.x, 2) + Math.pow(self.y-otherObj.y, 2))
-                    console.log("distance: " + distance)
+                    log.info("distance: " + distance)
 
-                    console.log("position: ("+ x + "," + y + ")")
-                    console.log("velocity: ("+ dx + "," + dy + ")")
-                    console.log("position: ("+ otherObj.x + "," + otherObj.y + ")")
-                    console.log("velocity: ("+ otherObj.dx + "," + otherObj.dy + ")")
+                    log.info("position: ("+ x + "," + y + ")")
+                    log.info("velocity: ("+ dx + "," + dy + ")")
+                    log.info("position: ("+ otherObj.x + "," + otherObj.y + ")")
+                    log.info("velocity: ("+ otherObj.dx + "," + otherObj.dy + ")")
 
                     var adjustVelocity = function() {
-                        console.log("HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                        console.log("multiplier:" + self.multiplier)
+                        log.info("HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                        log.info("multiplier:" + self.multiplier)
 
                         var towardsOtherX = otherObj.x-x, towardsOtherY = otherObj.y-y;
 
@@ -103,16 +105,16 @@
                             adjustVelocity()
                         }
                         else {
-                            console.log("points not valid")
-                            console.log(t1)
-                            console.log(t2)
+                            log.info("points not valid")
+                            log.info(t1)
+                            log.info(t2)
                             if(distance<this.radius+otherObj.radius) {
                                 adjustVelocity()
                             }
                         }
                             
                     }
-                    else console.log("discriminant invalid")
+                    else log.info("discriminant invalid")
                 }
                 
             }
