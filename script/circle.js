@@ -61,8 +61,23 @@
                         console.log("HIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                         console.log("multiplier:" + self.multiplier)
 
-                        dx = otherObj.dx;
-                        dy = otherObj.dy;
+                        var towardsOtherX = otherObj.x-x, towardsOtherY = otherObj.y-y;
+
+                        var distance = Math.sqrt(towardsOtherX*towardsOtherX+towardsOtherY*towardsOtherY);
+
+                        // Unit vector in the direction of the collision
+                        var ax=towardsOtherX /distance, ay=towardsOtherY/distance; 
+
+                        // Projection of the velocities in these axes
+                        var va1=(dx*ax+dy*ay), vb1=(-dx*ay+dy*ax); 
+                        var va2=(otherObj.dx*ax+otherObj.dy*ay);
+
+                        // new velocity towards other ball (for elastic objecs of equal mass)
+                        var vaP1=va2;
+
+                        // Undo the projections
+                        dx=vaP1*ax-vb1*ay;  
+                        dy=vaP1*ay+vb1*ax;
 
                     }
 
