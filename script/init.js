@@ -92,15 +92,23 @@
             clearTimeout(timer)
 	})
 
-        var gravityEnabled=true;
+        var gravityEnabled=true,
+        gravity=.5;
         // g
 	keypressHandler.up(71, function(){
             $.each(objects, function(i, o) {
-                o.ay+= gravityEnabled ? -.5 : .5;
+                o.ay+= gravityEnabled ? -gravity : gravity;
             })
             gravityEnabled=!gravityEnabled;
 	})
 	
+        // i
+	keypressHandler.up(73, function(){
+            gravity=-gravity
+            $.each(objects, function(i, o) {
+                o.ay=-o.ay;
+            })
+	})
     })
     
 }(jQuery));
