@@ -16,8 +16,8 @@
 
 	circle.x=10,
 	circle.y=10,
-	circle.dx=Math.floor(Math.random()*11)*2,
-	circle.dy=Math.floor(Math.random()*11)*2,
+	circle.dx=Math.floor(Math.random()*22),
+	circle.dy=Math.floor(Math.random()*22),
 	circle.ax=0,
 	circle.ay=.5
 	
@@ -31,7 +31,6 @@
         var objects = [circle, circle2];
 
 	var timer = setInterval(function(){
-            log.info("------------------------")
 	    
 	    ctx.clearRect(0,0,canvasWidth,canvasHeight);
             for(var i=0;i<objects.length;i++) {
